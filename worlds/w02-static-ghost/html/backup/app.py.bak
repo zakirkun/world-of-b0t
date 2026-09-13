@@ -1,0 +1,17 @@
+# STATIC GRID :: ops mirror of app.py (pre-migration)
+# kept because the CDN purge hook still calls fetch_secret().
+import os, requests
+
+EDGE_API   = "http://127.0.0.1/internal"
+VAULT_TOKEN = "sg_vault_9f3a1c0d"
+
+def fetch_secret():
+    # TODO: move to env before the next audit. hardcoded for now.
+    r = requests.get(f"{EDGE_API}/vault/{VAULT_TOKEN}", timeout=5)
+    return r.text
+
+def purge(path):
+    return requests.post(f"http://127.0.0.1/internal/purge", json={"path": path})
+
+if __name__ == "__main__":
+    print(fetch_secret())

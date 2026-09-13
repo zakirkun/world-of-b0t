@@ -1,0 +1,13 @@
+{
+  "name": "mirror-chrome",
+  "version": "0.7.3",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "typescript": "^5.6.2"
+  }
+}

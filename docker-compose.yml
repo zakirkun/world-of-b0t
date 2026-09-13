@@ -1,0 +1,9 @@
+version: "3.9"
+
+# World Of B0t - shared network so labs and scoreboard can talk to each other.
+# Ports are published on the host with 5-digit numbers (30001-30010).
+
+networks:
+  w0b:
+    name: w0b
+    driver: bridge

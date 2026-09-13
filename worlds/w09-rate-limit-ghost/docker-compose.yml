@@ -1,0 +1,32 @@
+services:
+  w09:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: w0b-w09
+    environment:
+      W0B_FLAG: ${W0B_FLAG:?must set W0B_FLAG - use manage.ps1/manage.sh}
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+    ports:
+      - "30009:8080"
+    depends_on:
+      - redis
+    networks:
+      - w0b
+    restart: unless-stopped
+
+  # The shared counter store. Deliberately internal-only: no host port, reachable
+  # from the app as `redis` on the w0b network.
+  redis:
+    image: redis:7-alpine
+    container_name: w0b-w09-redis
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    networks:
+      - w0b
+    restart: unless-stopped
+
+networks:
+  w0b:
+    name: w0b
+    external: true

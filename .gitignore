@@ -1,0 +1,23 @@
+# Secrets / generated state
+.secrets/
+**/flag.txt
+!**/flag.txt.example
+
+# Docker
+*.log
+
+# Node
+node_modules/
+scoreboard/data/*.db
+scoreboard/data/*.db-journal
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local editor / tooling state
+.claude/settings.local.json

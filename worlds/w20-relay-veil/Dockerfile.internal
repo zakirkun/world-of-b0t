@@ -1,0 +1,15 @@
+FROM python:3.12-alpine
+
+# CONTROL-0 :: internal upstream (World Of B0t challenge 20)
+# Category: Infra | Difficulty: hard | Vuln: config-path traversal -> admin route
+
+WORKDIR /app
+COPY internal/server.py /app/server.py
+
+# Flag is injected at runtime as an env var; never baked into a layer.
+ENV W0B_FLAG=""
+ENV PORT=9000
+
+USER 10002
+EXPOSE 9000
+CMD ["python3", "server.py"]

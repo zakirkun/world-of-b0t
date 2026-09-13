@@ -1,0 +1,25 @@
+{
+  "labs": [
+    { "id": "w01", "dir": "w01-neon-login",      "slug": "neon-login",      "category": "Web",       "difficulty": "easy",     "stack": "Python/Flask",       "vuln": "SQL injection auth bypass",      "port": 30001, "url": "http://localhost:30001" },
+    { "id": "w02", "dir": "w02-static-ghost",    "slug": "static-ghost",    "category": "Web",       "difficulty": "easy",     "stack": "Nginx",              "vuln": "Hidden file / source leak",      "port": 30002, "url": "http://localhost:30002" },
+    { "id": "w03", "dir": "w03-chrome-idor",     "slug": "chrome-idor",     "category": "Web",       "difficulty": "easy",     "stack": "PHP 8",              "vuln": "Insecure direct object reference","port": 30003, "url": "http://localhost:30003" },
+    { "id": "w04", "dir": "w04-token-crypt",     "slug": "token-crypt",     "category": "Crypto",    "difficulty": "medium",   "stack": "Go",                 "vuln": "Weak JWT secret",                "port": 30004, "url": "http://localhost:30004" },
+    { "id": "w05", "dir": "w05-data-jack",       "slug": "data-jack",       "category": "Web",       "difficulty": "medium",   "stack": "Node/Express",       "vuln": "Blind SQL injection",            "port": 30005, "url": "http://localhost:30005" },
+    { "id": "w06", "dir": "w06-command-deck",    "slug": "command-deck",    "category": "Web",       "difficulty": "medium",   "stack": "PHP 8",              "vuln": "Command injection",              "port": 30006, "url": "http://localhost:30006" },
+    { "id": "w07", "dir": "w07-mirror-chrome",   "slug": "mirror-chrome",   "category": "Web",       "difficulty": "medium",   "stack": "TypeScript/Node",    "vuln": "Server-side request forgery",    "port": 30007, "url": "http://localhost:30007" },
+    { "id": "w08", "dir": "w08-deser-zone",      "slug": "deser-zone",      "category": "Pwn",       "difficulty": "hard",     "stack": "Python",             "vuln": "Insecure deserialization",       "port": 30008, "url": "http://localhost:30008" },
+    { "id": "w09", "dir": "w09-rate-limit-ghost","slug": "rate-limit-ghost","category": "DevOpsSec", "difficulty": "hard",     "stack": "Python/Flask+Redis", "vuln": "Race condition / limit bypass",  "port": 30009, "url": "http://localhost:30009" },
+    { "id": "w10", "dir": "w10-ghost-shell",     "slug": "ghost-shell",     "category": "Infra",     "difficulty": "hard",     "stack": "Go+Postgres+Nginx",  "vuln": "Recon -> cred leak -> RCE",      "port": 30010, "url": "http://localhost:30010" },
+
+    { "id": "w11", "dir": "w11-proxy-shift",     "slug": "proxy-shift",     "category": "Web",       "difficulty": "hard",     "stack": "Go + Python",        "vuln": "Reverse-proxy path-normalization bypass", "port": 30011, "url": "http://localhost:30011" },
+    { "id": "w12", "dir": "w12-des-triple",      "slug": "des-triple",      "category": "Crypto",    "difficulty": "hard",     "stack": "Python",             "vuln": "Semi-weak DES triple-DES oracle", "port": 30012, "url": "http://localhost:30012" },
+    { "id": "w13", "dir": "w13-gate-scan",       "slug": "gate-scan",       "category": "Web",       "difficulty": "medium",   "stack": "Go + Python",        "vuln": "SSRF hostname-blocklist bypass",  "port": 30013, "url": "http://localhost:30013" },
+    { "id": "w14", "dir": "w14-pickle-vault",    "slug": "pickle-vault",    "category": "Pwn",       "difficulty": "medium",   "stack": "Python",             "vuln": "Pickle deserialization RCE",      "port": 30014, "url": "http://localhost:30014" },
+    { "id": "w15", "dir": "w15-rate-gauntlet",   "slug": "rate-gauntlet",   "category": "DevOpsSec", "difficulty": "easy",     "stack": "Python",             "vuln": "TOCTOU race on redemption limit", "port": 30015, "url": "http://localhost:30015" },
+    { "id": "w16", "dir": "w16-cache-poison",    "slug": "cache-poison",    "category": "Web",       "difficulty": "easy",     "stack": "Python",             "vuln": "HTTP response splitting",         "port": 30016, "url": "http://localhost:30016" },
+    { "id": "w17", "dir": "w17-concat-walk",     "slug": "concat-walk",     "category": "Web",       "difficulty": "easy",     "stack": "Go",                 "vuln": "Path traversal via concatenation", "port": 30017, "url": "http://localhost:30017" },
+    { "id": "w18", "dir": "w18-grid-maze",       "slug": "grid-maze",       "category": "Web",       "difficulty": "medium",   "stack": "Python",             "vuln": "Session state bleed / predictable id", "port": 30018, "url": "http://localhost:30018" },
+    { "id": "w19", "dir": "w19-blob-forge",      "slug": "blob-forge",      "category": "Web",       "difficulty": "medium",   "stack": "PHP 8",              "vuln": "PHP object injection -> file write", "port": 30019, "url": "http://localhost:30019" },
+    { "id": "w20", "dir": "w20-relay-veil",      "slug": "relay-veil",      "category": "Infra",     "difficulty": "hard",     "stack": "Go + Nginx",         "vuln": "Config-path traversal -> admin route", "port": 30020, "url": "http://localhost:30020" }
+  ]
+}

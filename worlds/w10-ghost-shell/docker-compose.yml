@@ -1,0 +1,53 @@
+services:
+  # Public edge. The ONLY service published to the host.
+  edge:
+    image: nginx:1.27-alpine
+    container_name: w0b-w10
+    depends_on:
+      - console
+    ports:
+      - "30010:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - w0b
+    restart: unless-stopped
+
+  # Ops console. Reaches the datastore with psql and holds the flag.
+  console:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: w0b-w10-console
+    depends_on:
+      - db
+    environment:
+      W0B_FLAG: ${W0B_FLAG:?must set W0B_FLAG - use manage.ps1/manage.sh}
+      W0B_DB_HOST: w0b-w10-db
+      W0B_DB_PORT: "5432"
+      W0B_DB_USER: ghost
+      W0B_DB_PASS: ghost_ops_2024
+      W0B_DB_NAME: ghostshell
+    networks:
+      - w0b
+    restart: unless-stopped
+    # No ports: reachable only from the edge, inside the w0b network.
+
+  # Datastore. Not published; the host cannot open a session to it directly.
+  db:
+    image: postgres:16-alpine
+    container_name: w0b-w10-db
+    environment:
+      POSTGRES_USER: ghost
+      POSTGRES_PASSWORD: ghost_ops_2024
+      POSTGRES_DB: ghostshell
+    volumes:
+      - ./docker/db-init.sql:/docker-entrypoint-initdb.d/10-init.sql:ro
+    networks:
+      - w0b
+    restart: unless-stopped
+
+networks:
+  w0b:
+    name: w0b
+    external: true

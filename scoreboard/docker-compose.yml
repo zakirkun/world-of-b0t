@@ -1,0 +1,28 @@
+services:
+  scoreboard:
+    build: .
+    container_name: w0b-scoreboard
+    ports:
+      - "30000:30000"
+    environment:
+      PORT: 30000
+      DB_PATH: /app/data/scoreboard.db
+      FLAGS_PATH: /app/data/flags.json
+    volumes:
+      - scoreboard-data:/app/data
+      # server.js resolves the catalogue as path.join(__dirname, '..', 'labs.json'),
+      # and __dirname is /app - so it reads /labs.json, not /app/labs.json.
+      - ../labs.json:/labs.json:ro
+      # Flags file is written by the launcher into .secrets/ and mounted read-only.
+      - ../.secrets/flags.json:/app/data/flags.json:ro
+    networks:
+      - w0b
+    restart: unless-stopped
+
+volumes:
+  scoreboard-data:
+
+networks:
+  w0b:
+    name: w0b
+    external: true

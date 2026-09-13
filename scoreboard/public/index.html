@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>World Of B0t // Scoreboard</title>
+<style>
+  :root {
+    --bg: #07070d;
+    --panel: #0d0d18;
+    --ink: #d9faff;
+    --muted: #6c7a8a;
+    --cy: #00f0ff;
+    --mg: #ff2e97;
+    --yl: #ffe600;
+    --gr: #39ff88;
+    --line: #1c2438;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(0,240,255,.10), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(255,46,151,.10), transparent 55%),
+      var(--bg);
+    color: var(--ink);
+    font: 14px/1.5 "SF Mono", "JetBrains Mono", "Fira Code", Consolas, monospace;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px 64px; }
+
+  header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 28px; }
+  h1 {
+    margin: 0; font-size: 34px; letter-spacing: 3px;
+    color: var(--cy);
+    text-shadow: 0 0 10px rgba(0,240,255,.6), 0 0 32px rgba(0,240,255,.25);
+  }
+  h1 span { color: var(--mg); text-shadow: 0 0 10px rgba(255,46,151,.6); }
+  .sub { color: var(--muted); margin-top: 6px; letter-spacing: 1px; }
+
+  h2 { font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin: 32px 0 12px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500; }
+  tbody tr:hover { background: rgba(0,240,255,.04); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .rank { color: var(--yl); }
+  .rank.g1 { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,.7); }
+  .rank.g2 { color: #cfd8e3; }
+  .rank.g3 { color: #d18a4a; }
+
+  .pill {
+    display: inline-block; padding: 1px 8px; border-radius: 20px;
+    font-size: 11px; letter-spacing: .5px; border: 1px solid var(--line); color: var(--muted);
+  }
+  .pill.Web { color: var(--cy); border-color: rgba(0,240,255,.4); }
+  .pill.Crypto { color: var(--yl); border-color: rgba(255,230,0,.4); }
+  .pill.Pwn { color: var(--mg); border-color: rgba(255,46,151,.4); }
+  .pill.DevOpsSec { color: var(--gr); border-color: rgba(57,255,136,.4); }
+  .pill.Infra { color: #b39dff; border-color: rgba(179,157,255,.4); }
+
+  .diff.easy { color: var(--gr); }
+  .diff.medium { color: var(--yl); }
+  .diff.hard { color: var(--mg); }
+
+  .empty { color: var(--muted); padding: 16px 0; }
+
+  .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  input, button {
+    font: inherit; padding: 10px 13px; border-radius: 6px;
+    background: var(--panel); color: var(--ink); border: 1px solid var(--line);
+  }
+  input:focus { outline: none; border-color: var(--cy); box-shadow: 0 0 0 3px rgba(0,240,255,.12); }
+  button {
+    background: rgba(0,240,255,.10); border-color: var(--cy); color: var(--cy);
+    cursor: pointer; letter-spacing: 1px;
+  }
+  button:hover { background: rgba(0,240,255,.2); box-shadow: 0 0 14px rgba(0,240,255,.35); }
+
+  #submitResult { margin-top: 12px; font-size: 13px; min-height: 20px; white-space: pre-wrap; }
+  .ok { color: var(--gr); }
+  .err { color: var(--mg); }
+  .hint { margin-top: 10px; font-size: 12px; color: var(--muted); }
+  .hint code { color: var(--cy); }
+
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 20px 16px 40px; }
+    h1 { font-size: 22px; }
+    table { font-size: 12px; }
+    th, td { padding: 7px 6px; }
+    .hide-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>WORLD <span>OF</span> B0T</h1>
+    <div class="sub">// cyberpunk pentest lab &mdash; live scoreboard</div>
+  </header>
+
+  <h2>Submit flag</h2>
+  <div class="row">
+    <input id="flag" placeholder="hex4b0t{...}" style="flex:2;min-width:220px" autocomplete="off" spellcheck="false" />
+    <input id="team" placeholder="team" style="flex:1;min-width:120px" autocomplete="off" />
+    <button id="submitBtn">SUBMIT</button>
+  </div>
+  <div id="submitResult"></div>
+  <div class="hint">
+    Bots: same check via REST <code>POST /api/submit</code> or MCP <code>POST /mcp</code>
+    (tools <code>list_labs</code>, <code>get_lab</code>, <code>submit_flag</code>, <code>get_leaderboard</code>).
+  </div>
+
+  <h2>Bot leaderboard</h2>
+  <table>
+    <thead>
+      <tr><th style="width:60px">#</th><th>Team / Bot</th><th class="num">Solves</th><th class="num">Score</th><th class="num hide-sm">Easy/Med/Hard</th><th class="hide-sm">Last solve</th></tr>
+    </thead>
+    <tbody id="leaderboard"><tr><td colspan="6" class="empty">loading...</td></tr></tbody>
+  </table>
+
+  <h2>Challenges</h2>
+  <table>
+    <thead>
+      <tr><th style="width:44px">#</th><th>Lab</th><th class="hide-sm">Category</th><th class="hide-sm">Difficulty</th><th class="num">Score</th><th class="hide-sm">Stack</th><th class="num">Port</th><th class="num">Teams</th></tr>
+    </thead>
+    <tbody id="labs"><tr><td colspan="8" class="empty">loading...</td></tr></tbody>
+  </table>
+
+  <h2>Recent solves</h2>
+  <table>
+    <thead>
+      <tr><th>Lab</th><th>Team</th><th class="num">Points</th><th class="hide-sm">Time</th></tr>
+    </thead>
+    <tbody id="solves"><tr><td colspan="4" class="empty">loading...</td></tr></tbody>
+  </table>
+
+  <footer>Run `manage.ps1 up` to start labs &middot; flags are generated per-session &middot; local use only</footer>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const time = (t) => t ? new Date(t).toLocaleString() : '-';
+
+async function getJSON(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+async function refresh() {
+  try {
+    const [lb, labs, solves] = await Promise.all([
+      getJSON('/api/leaderboard'),
+      getJSON('/api/labs'),
+      getJSON('/api/solves'),
+    ]);
+
+    // Difficulty mix per team, from the labs catalogue (points live there too).
+    const diffOf = Object.fromEntries(labs.map((l) => [l.id, l.difficulty]));
+    const mix = (labList) => {
+      const c = { easy: 0, medium: 0, hard: 0 };
+      for (const id of (labList || '').split(',').filter(Boolean)) if (diffOf[id]) c[diffOf[id]]++;
+      return `${c.easy}/${c.medium}/${c.hard}`;
+    };
+
+    $('leaderboard').innerHTML = lb.length
+      ? lb.map((r, i) => `
+          <tr>
+            <td class="rank g${i + 1 <= 3 ? i + 1 : ''}">${i + 1}</td>
+            <td>${esc(r.team)}</td>
+            <td class="num">${r.solves}</td>
+            <td class="num">${r.score}</td>
+            <td class="num hide-sm" style="color:var(--muted)">${mix(r.labs)}</td>
+            <td class="hide-sm">${time(r.last_solve)}</td>
+          </tr>`).join('')
+      : '<tr><td colspan="6" class="empty">no solves yet</td></tr>';
+
+    $('labs').innerHTML = labs.length
+      ? labs.map((l, i) => `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${esc(l.slug)}<br><span style="color:var(--muted);font-size:11px">${esc(l.vuln)}</span></td>
+            <td class="hide-sm"><span class="pill ${esc(l.category)}">${esc(l.category)}</span></td>
+            <td class="hide-sm diff ${esc(l.difficulty)}">${esc(l.difficulty)}</td>
+            <td class="num" style="color:var(--yl)">${l.points ?? 100}</td>
+            <td class="hide-sm" style="color:var(--muted)">${esc(l.stack)}</td>
+            <td class="num">${l.port}</td>
+            <td class="num">${l.teams_solved}</td>
+          </tr>`).join('')
+      : '<tr><td colspan="8" class="empty">no labs configured</td></tr>';
+
+    $('solves').innerHTML = solves.length
+      ? solves.slice(0, 25).map((s) => `
+          <tr>
+            <td>${esc(s.lab)}</td>
+            <td>${esc(s.team)}</td>
+            <td class="num">${s.points}</td>
+            <td class="hide-sm">${time(s.created_at)}</td>
+          </tr>`).join('')
+      : '<tr><td colspan="4" class="empty">no solves yet</td></tr>';
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+$('submitBtn').addEventListener('click', submit);
+$('flag').addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+
+async function submit() {
+  const flag = $('flag').value.trim();
+  const team = $('team').value.trim() || 'anon';
+  if (!flag) return;
+  const out = $('submitResult');
+  out.className = '';
+  out.textContent = '...';
+  try {
+    const r = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ flag, team }),
+    });
+    const j = await r.json();
+    if (j.ok) {
+      out.className = 'ok';
+      out.textContent = `[+] ${j.lab_name || j.lab} solved by ${j.team}  +${j.points} pts  rank #${j.rank}`;
+      $('flag').value = '';
+    } else {
+      out.className = 'err';
+      out.textContent = `[!] ${j.duplicate ? 'already solved by this team' : (j.error || 'rejected')}`;
+    }
+    refresh();
+  } catch (e) {
+    out.className = 'err';
+    out.textContent = '[!] submit failed: ' + e.message;
+  }
+}
+
+// Restore team from localStorage (per-viewer convenience only).
+try { $('team').value = localStorage.getItem('w0b_team') || ''; } catch {}
+$('team').addEventListener('change', () => {
+  try { localStorage.setItem('w0b_team', $('team').value); } catch {}
+});
+
+refresh();
+setInterval(refresh, 5000);
+</script>
+</body>
+</html>

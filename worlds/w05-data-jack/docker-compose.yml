@@ -1,0 +1,16 @@
+services:
+  w05:
+    build: .
+    container_name: w0b-w05
+    ports:
+      - "30005:3000"
+    environment:
+      W0B_FLAG: ${W0B_FLAG:?must set W0B_FLAG - use manage.ps1/manage.sh}
+    networks:
+      - w0b
+    restart: unless-stopped
+
+networks:
+  w0b:
+    name: w0b
+    external: true

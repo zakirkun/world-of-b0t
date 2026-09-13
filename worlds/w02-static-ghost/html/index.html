@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="lab" content="w02">
+<title>STATIC GRID // edge delivery</title>
+<style>
+  :root{--bg:#05050c;--cyan:#00f0ff;--mag:#ff2e97;--dim:#7a86a8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:#cfe6f5;
+       font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+       background-image:linear-gradient(rgba(0,240,255,.04) 1px,transparent 1px),
+                        linear-gradient(90deg,rgba(255,46,151,.04) 1px,transparent 1px);
+       background-size:44px 44px}
+  header{padding:40px 24px 24px;border-bottom:1px solid rgba(0,240,255,.25)}
+  h1{margin:0;font-size:clamp(26px,6vw,52px);letter-spacing:.14em;
+     color:var(--cyan);text-shadow:0 0 18px rgba(0,240,255,.55)}
+  h1 span{color:var(--mag);text-shadow:0 0 18px rgba(255,46,151,.55)}
+  .sub{color:var(--dim);letter-spacing:.22em;text-transform:uppercase;font-size:11px;margin-top:10px}
+  main{max-width:920px;margin:0 auto;padding:32px 24px 72px}
+  .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:26px 0}
+  .card{border:1px solid rgba(0,240,255,.22);padding:16px;background:rgba(0,240,255,.03)}
+  .card h3{margin:0 0 8px;font-size:12px;letter-spacing:.18em;color:var(--mag);text-transform:uppercase}
+  .card p{margin:0;color:var(--dim);font-size:13px}
+  .bar{height:6px;background:linear-gradient(90deg,var(--cyan),var(--mag));margin:24px 0;opacity:.7}
+  a{color:var(--cyan)}
+  pre{border-left:2px solid var(--mag);padding:10px 14px;background:rgba(255,46,151,.05);overflow-x:auto}
+  footer{color:var(--dim);font-size:11px;padding:24px;border-top:1px solid rgba(0,240,255,.15)}
+</style>
+</head>
+<body>
+<header>
+  <h1>STATIC<span>GRID</span></h1>
+  <div class="sub">edge delivery network // node sg-07</div>
+</header>
+<main>
+  <div class="bar"></div>
+  <p>STATIC GRID serves immutable assets from 41 edge nodes with a 99.997%
+     cold-cache hit ratio. Marketing site mirror for internal comms.</p>
+
+  <div class="grid">
+    <div class="card"><h3>Latency</h3><p>p99 4.2ms global</p></div>
+    <div class="card"><h3>Nodes</h3><p>41 active / 0 degraded</p></div>
+    <div class="card"><h3>Deploys</h3><p>ci pipeline locked (see ops)</p></div>
+  </div>
+
+  <h3 style="color:var(--mag);letter-spacing:.18em;font-size:12px">DEPLOY NOTES</h3>
+  <pre>$ ./sg-deploy push --edge
+[ok] atomic swap complete
+[!!] legacy mirror still mounted at /backup/</pre>
+  <p>Ops mirrors keep the last release tree around "just in case". If you need
+     an older artifact, the crawler index usually points to it.</p>
+</main>
+<footer>STATIC GRID (c) 20XX — all assets cached, none encrypted.</footer>
+</body>
+</html>

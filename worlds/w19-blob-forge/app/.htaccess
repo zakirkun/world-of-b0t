@@ -1,0 +1,6 @@
+# Front controller: everything that is not a real file goes to index.php.
+# A dropped /shell.php is a real file, so it is served directly (and executed).
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]

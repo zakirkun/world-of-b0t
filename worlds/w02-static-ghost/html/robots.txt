@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /backup/
+Disallow: /src/
+Disallow: /vault/
+Disallow: /ops/

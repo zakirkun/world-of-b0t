@@ -25,7 +25,7 @@ param(
   [Parameter(Position = 1, ValueFromRemainingArguments = $true)]
   [string[]]$Targets,
 
-  [ValidateSet('Web', 'Crypto', 'Pwn', 'DevOpsSec', 'Infra')]
+  [ValidateSet('Web', 'Crypto', 'Pwn', 'DevOpsSec', 'Infra', 'Reverse', 'Graybox', 'OSINT')]
   [string]$Category,
 
   [string]$Flag,

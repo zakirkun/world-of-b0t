@@ -20,6 +20,10 @@
     { "id": "w17", "dir": "w17-concat-walk",     "slug": "concat-walk",     "category": "Web",       "difficulty": "easy",     "stack": "Go",                 "vuln": "Path traversal via concatenation", "port": 30017, "url": "http://localhost:30017" },
     { "id": "w18", "dir": "w18-grid-maze",       "slug": "grid-maze",       "category": "Web",       "difficulty": "medium",   "stack": "Python",             "vuln": "Session state bleed / predictable id", "port": 30018, "url": "http://localhost:30018" },
     { "id": "w19", "dir": "w19-blob-forge",      "slug": "blob-forge",      "category": "Web",       "difficulty": "medium",   "stack": "PHP 8",              "vuln": "PHP object injection -> file write", "port": 30019, "url": "http://localhost:30019" },
-    { "id": "w20", "dir": "w20-relay-veil",      "slug": "relay-veil",      "category": "Infra",     "difficulty": "hard",     "stack": "Go + Nginx",         "vuln": "Config-path traversal -> admin route", "port": 30020, "url": "http://localhost:30020" }
+    { "id": "w20", "dir": "w20-relay-veil",      "slug": "relay-veil",      "category": "Infra",     "difficulty": "hard",     "stack": "Go + Nginx",         "vuln": "Config-path traversal -> admin route", "port": 30020, "url": "http://localhost:30020" },
+
+    { "id": "w21", "dir": "w21-re-vault",        "slug": "re-vault",        "category": "Reverse",   "difficulty": "medium",   "stack": "Go (stripped binary)","vuln": "License key recoverable from shipped binary", "port": 30021, "url": "http://localhost:30021" },
+    { "id": "w22", "dir": "w22-bytecode-vault",  "slug": "bytecode-vault",  "category": "Graybox",   "difficulty": "hard",     "stack": "Python 3.12 (.pyc)", "vuln": "Secret logic recoverable from shipped bytecode", "port": 30022, "url": "http://localhost:30022" },
+    { "id": "w23", "dir": "w23-dossier-trace",   "slug": "dossier-trace",   "category": "OSINT",     "difficulty": "medium",   "stack": "Python",             "vuln": "Artifact correlation -> unlisted route", "port": 30023, "url": "http://localhost:30023" }
   ]
 }

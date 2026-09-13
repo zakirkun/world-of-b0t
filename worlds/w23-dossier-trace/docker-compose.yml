@@ -1,0 +1,17 @@
+services:
+  w23:
+    container_name: w0b-w23
+    build: .
+    image: w0b-w23
+    ports:
+      - "30023:8080"
+    environment:
+      # must set W0B_FLAG - use manage.ps1/manage.sh
+      W0B_FLAG: ${W0B_FLAG:?must set W0B_FLAG - use manage.ps1/manage.sh}
+    networks:
+      - w0b
+    restart: unless-stopped
+
+networks:
+  w0b:
+    external: true

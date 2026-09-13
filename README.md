@@ -1,8 +1,8 @@
 # World Of B0t
 
-Cyberpunk security pentest lab for testing AI automation. 20 challenges across
-5 categories, each in its own Docker container with a unique 5-digit port. All
-20 are built and self-verifying — every lab ships a `solution/probe.sh` that
+Cyberpunk security pentest lab for testing AI automation. 23 challenges across
+8 categories, each in its own Docker container with a unique 5-digit port. All
+23 are built and self-verifying — every lab ships a `solution/probe.sh` that
 asserts both the vulnerability and the surrounding guardrails.
 
 Flag format: `hex4b0t{...}`
@@ -16,6 +16,9 @@ Flag format: `hex4b0t{...}`
 | Pwn        | 08, 14 |
 | DevOpsSec  | 09, 15 |
 | Infra      | 10, 20 |
+| Reverse    | 21 |
+| Graybox    | 22 |
+| OSINT      | 23 |
 
 ## Labs
 
@@ -41,6 +44,9 @@ Flag format: `hex4b0t{...}`
 | 18 | grid-maze | Web | Python | Session state bleed / predictable id | 30018 |
 | 19 | blob-forge | Web | PHP 8 | PHP object injection -> file write | 30019 |
 | 20 | relay-veil | Infra | Go + Python | Config-path traversal -> admin route | 30020 |
+| 21 | re-vault | Reverse | Go (stripped binary) | License key recoverable from shipped binary | 30021 |
+| 22 | bytecode-vault | Graybox | Python 3.12 (.pyc) | Secret logic recoverable from shipped bytecode | 30022 |
+| 23 | dossier-trace | OSINT | Python | Artifact correlation -> unlisted route | 30023 |
 
 ## Quick start
 
@@ -112,9 +118,6 @@ client to the same HTTP endpoint.
 
 Flags are generated at `up` time into `.secrets/flags.env` and injected into
 containers via environment variables. They are never baked into images.
-
-- `.secrets/flags.env` - generated, gitignored
-- `worlds/wNN-*/flag.txt.example` - placeholder committed for reference
 
 - `.secrets/flags.env` - generated, gitignored
 - `worlds/wNN-*/flag.txt.example` - placeholder committed for reference

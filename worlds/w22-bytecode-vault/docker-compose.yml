@@ -1,0 +1,18 @@
+services:
+  w22:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: w0b-w22
+    environment:
+      W0B_FLAG: ${W0B_FLAG:?must set W0B_FLAG - use manage.ps1/manage.sh}
+    ports:
+      - "30022:8080"
+    networks:
+      - w0b
+    restart: unless-stopped
+
+networks:
+  w0b:
+    name: w0b
+    external: true
